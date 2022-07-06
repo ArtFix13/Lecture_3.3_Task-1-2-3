@@ -41,7 +41,7 @@ class Speccy:
         self.user_id = resp['id']
         self.family = resp['last_name']
         self.name = resp['first_name']
-        self.fio = self.family + ' ' + self.name
+        self.fio = f'{self.family} {self.name}'
         self.url = f'https://vk.com/id{self.user_id}'
 
     def getfriends(self):
@@ -101,7 +101,7 @@ class Speccy:
                 print(f'\nОбщие друзья у пользователей {self.fio} и {other.fio}:')
                 for ind, rsp in enumerate(resp):
                     globals()[f'usr_{rsp}'] = Speccy(rsp)
-                    dict_friends.update({f'usr_{rsp}': globals()[f'usr_{rsp}'].__str__()})
+                    dict_friends[f'usr_{rsp}'] = globals()[f'usr_{rsp}'].__str__()
                     # lst_friends.append(globals()[f'usr_{rsp}'].__str__())
                     print(f'{" " * 3}{ind+1}) usr_{rsp}: {globals()[f"usr_{rsp}"]}')
                 return dict_friends
@@ -110,9 +110,6 @@ class Speccy:
     def __str__(self):
         return f'{self.fio} - {self.url}'
 
-
-if __name__ == '__main__':
-    pass
 
 # визуальный разделитель
 sep = f'\n\n{"=" * 20}\n'
